@@ -1,14 +1,13 @@
 # FROM alpine:3.2
-FROM gliderlabs/alpine
+FROM gliderlabs/alpine:3.3
 MAINTAINER smizy
 
 RUN adduser -D -g '' -u 1000 docker 
 
-RUN apk --update add \
+RUN apk --no-cache add \
 	nginx \
 	ca-certificates \
 	&& \
-	rm -rf /var/cache/apk/* && \
 	ln -sf /dev/stdout /var/log/nginx/access.log && \
 	ln -sf /dev/stderr /var/log/nginx/error.log && \
 	mkdir -p /tmp/nginx/client-body
